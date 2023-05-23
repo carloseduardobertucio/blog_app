@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Blog Posts</h1>
+    {% for post in posts %}
+        <h2><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h2>
+        <p>Author: {{ post.author }}</p>
+        <p>Published: {{ post.created_at }}</p>
+    {% empty %}
+        <p>No posts available.</p>
+
+    
+    {% endfor %}
+
+ <div class="col-md-8 card mb-4  mt-3 ">
+        <div class="card-body">
+          <h3>Leave a post</h3>
+          <form method="post" style="margin-top: 1.3em;">
+            {{ post_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+          </form>
+        </div>
+    </div>
+  
+
+  {% endblock %}
+
+
